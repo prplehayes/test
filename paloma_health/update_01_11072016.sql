@@ -1,0 +1,1 @@
+INSERT INTO `claim_status` (`id`, `name`) VALUES ('12', 'Draft');

@@ -1,0 +1,328 @@
+<div class="patient view large-9 medium-8 columns content">
+<?= $this->Form->create($patient,array('type' => 'file','class'=>'form-horizontal')) ?>
+<fieldset>
+<legend>
+<?= __('Patient Information');
+   ?>
+</legend>
+<br>
+<div class="span12 nomarginleft"> <?php echo $this->Form->hidden('practice_id', ['value' => $patient->practice_id]);?>
+  <div class="clear"></div>
+  <div class="control-group">
+    <div class="span2">
+      <label class="control-label">
+      <?= __('First Name') ?>
+      </label>
+    </div>
+    <div class="controls span4"><?php echo $this->Form->input('first_name', ['label'=>false,'div'=>false,'class'=>'input','Placeholder'=>'First Name']);?></div>
+    <div class="span1">
+      <label class="control-label">
+      <?= __('Gender') ?>
+      </label>
+    </div>
+    <div class="controls span4 inline-radio"><?php echo $this->Form->radio('gender',[['value' => 'Male', 'text' => ' Male'],
+        ['value' => 'Female', 'text' => ' Female']]);?></div>
+  </div>
+  <div class="clear"></div>
+  <div class="control-group">
+    <div class="span2">
+      <label class="control-label">
+      <?= __('Middle Name') ?>
+      </label>
+    </div>
+    <div class="controls span4"><?php echo $this->Form->input('middle_name', ['label'=>false,'div'=>false,'class'=>'input','Placeholder'=>'Middle Name']);?></div>
+  </div>
+  <div class="clear"></div>
+  <div class="control-group">
+    <div class="span2">
+      <label class="control-label">
+      <?= __('Last Name') ?>
+      </label>
+    </div>
+    <div class="controls span4"><?php echo $this->Form->input('last_name', ['label'=>false,'div'=>false,'class'=>'input','Placeholder'=>'Last Name']);?></div>
+  </div>
+  <div class="clear"></div>
+  <div class="control-group">
+    <div class="span2">
+      <label class="control-label">
+      <?= __('SSN') ?>
+      </label>
+    </div>
+    <div class="controls span4"><?php echo $this->Form->input('ssn', ['label'=>false,'div'=>false,'class'=>'input','Placeholder'=>'Social Security Number']);?></div>
+    <div class="span2">
+      <label class="control-label">
+      <?= __('Medicare Number') ?>
+      </label>
+    </div>
+    <div class="controls span4"><?php echo $this->Form->input('medicare_number', ['label'=>false,'div'=>false,'class'=>'input','Placeholder'=>'Medicare Number']);?></div>
+  </div>
+  <div class="clear"></div>
+  <div class="control-group">
+    <div class="span2">
+      <label class="control-label">
+      <?= __('DOB') ?>
+      </label>
+    </div>
+    <div class="controls span4">
+      <?php 
+	  if($patient->dob!='' && $patient->dob!='0000-00-00'){
+			$patient->dob=strtotime($patient->dob);
+		}?>
+      <?php echo $this->Form->input('dob', ['value'=>date("m/d/Y",$patient->dob),'label'=>false,'div'=>false,'type'=>'text','class'=>'datepicker input','Placeholder'=>'Date of birth']);?></div>
+  </div>
+  <div class="clear"></div>
+  <div class="frm-head row-fluid">
+    <div class="span8">
+      <h2>VI - Verification Information</h2>
+    </div>
+    <div class="frm-bt span4"></div>
+  </div>
+  <div class="control-group">
+    <div class="span4">
+     <strong>
+      <?= __('Photo Id') ?>
+      </strong>
+    <br>
+      <?php if($patient->img_photo_id_upload!=''){?>
+      <a onclick="PopupCenterDual('<?php echo $this->request->webroot?>uploads/<?php echo $patient->img_photo_id_upload;?>', 'Photo Id',450,450);" href="javascript:void(0);"  title="Photo Id"><img src="<?php echo $this->request->webroot?>img/user-bg.png" width="50" height="50"> <br><?php echo $patient->img_photo_id_upload;?> </a>
+      <?php }?>
+    </div>
+  
+    <div class="span4">
+      <strong>
+      <?= __('Medicare Card') ?>
+      </strong>
+    <br>
+      <?php if($patient->img_medicare_card!=''){?>
+      <a onclick="PopupCenterDual('<?php echo $this->request->webroot?>uploads/<?php echo $patient->img_medicare_card;?>', 'Medicare Card',450,450);" href="javascript:void(0);" title="Medicare Card"><img src="<?php echo $this->request->webroot?>img/user-bg.png" width="50" height="50"> <br><?php echo $patient->img_medicare_card;?> </a>
+      <?php }?>
+    </div>
+  
+    <div class="span4">
+      <strong>
+      <?= __('Consent Form') ?>
+     </strong>
+    <br>
+      <?php if($patient->consent_form_upload!=''){?>
+      <a onclick="PopupCenterDual('<?php echo $this->request->webroot?>uploads/<?php echo $patient->consent_form_upload;?>', 'Consent Form',450,450);" href="javascript:void(0);" title="Consent Form"><img src="<?php echo $this->request->webroot?>img/user-bg.png" width="50" height="50"><br> <?php echo $patient->consent_form_upload;?> </a>
+      <?php }?>
+    </div>
+  </div>
+  <div class="clear">&nbsp;</div>
+  <div class=" nomarginleft">
+    <div class="span4 nomarginleft"><strong>
+      <?= __('Denti-Cal Verification Form') ?>
+      </strong><br>
+      <br>
+      <div>
+        <?php if($claim->dental_verification_upload!=''){?>
+        <a onclick="PopupCenterDual('<?php echo $this->request->webroot?>uploads/<?php echo $claim->dental_verification_upload;?>', 'Denti-Cal Verification Form',450,450);" title="Denti-Cal Verification Form" href="javascript:void(0);"><img src="<?php echo $this->request->webroot?>img/user-bg.png" width="50" height="50"> <br>
+        <?php echo $claim->dental_verification_upload;?> </a>
+        <?php }?>
+      </div>
+    </div>
+    <div class="span4"><strong>
+      <?= __('Progress Notes') ?>
+      </strong><br>
+      <br>
+      <div>
+        <?php if($claim->progress_notes_upload!=''){?>
+        <a onclick="PopupCenterDual('<?php echo $this->request->webroot?>uploads/<?php echo $claim->progress_notes_upload;?>', 'Progress Notes',450,450);"  href="javascript:void(0);" title="Progress Notes"><img src="<?php echo $this->request->webroot?>img/user-bg.png" width="50" height="50"> <br>
+        <?php echo $claim->progress_notes_upload;?> </a>
+        <?php }?>
+      </div>
+    </div>
+	 <div class="span4"><strong>
+      <?= __('Registrion Form ') ?>
+      </strong><br>
+      <br>
+      <div>
+        <?php if($patient->registration_form_upload!=''){?>
+        <a onclick="PopupCenterDual('<?php echo $this->request->webroot?>uploads/<?php echo $patient->registration_form_upload;?>', 'Registrion Form ',450,450);"  href="javascript:void(0);" title="Registrion Form "><img src="<?php echo $this->request->webroot?>img/user-bg.png" width="50" height="50"> <br>
+        <?php echo $patient->registration_form_upload;?> </a>
+        <?php }?>
+      </div>
+    </div>
+  </div>
+  <div class="clear"><br>&nbsp;</div>
+  <div class="clear">
+    <h3>Past Filed Claim</h3>
+  </div>
+  <div id="claimlist"></div>
+  <div class="clear"></div>
+  <div class="clear">
+    <h3>Billing Code Information</h3>
+  </div>
+  <div class="bilingcode">
+    <div class="span12 nomarginleft">
+      <div class="span12">
+        <div>
+		<div style="margin:10px auto;"><strong><?= __('Tooth Codes') ?></strong></div>
+		
+          <div class="span12 nomarginleft">
+				<?php if (!empty($claim->cpt_codes)): ?>
+            <?php 
+			foreach ($claim->cpt_codes as $cptCodes): 
+			$toothnumber=$cptCodes->_joinData->tooth_number;
+			$surface=$cptCodes->_joinData->surface;
+			$quadrent_1_code=$cptCodes->_joinData->quadrent_1_code;
+			$quadrent_2_code=$cptCodes->_joinData->quadrent_2_code;
+			$arch_code=$cptCodes->_joinData->arch_code;
+			$upper_or_lower=$cptCodes->_joinData->upper_or_lower;
+			?>
+                <div class="cptbox">
+				<div class="inlinebox"><?= h($cptCodes->code) ?> <?= h($cptCodes->description) ?> </div>
+				<?php if($toothnumber|| $surface ||$quadrent_1_code||$arch_code||$upper_or_lower){?>
+				<div class="inlinebox"><?php
+					if($toothnumber){ echo "<span>Tooth Number :".$toothnumber."</span>&nbsp;";}
+					if($surface){ echo "<span>Surface :".$surface."</span>&nbsp;";}
+					if($quadrent_1_code){ echo "<span>Quadrent Code :".$quadrent_1_code."</span>&nbsp;";}
+					//if($quadrent_2_code){ echo "<span>Quadrent Code 2 :".$quadrent_2_code."</span>&nbsp;";}
+					if($arch_code){ echo "<span>Arch Code :".$arch_code."</span>&nbsp;";}
+					if($upper_or_lower){ echo "<span>Upper/Lower :".$upper_or_lower."</span>&nbsp;";}
+				?>
+				</div>
+				<?php }?>
+				</div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+			</div>
+        </div>
+        <div class="clear">
+         
+        </div>
+        <div>
+		<div style="margin:10px auto;"><strong><?= __('ICD-10 Codes') ?></strong></div>
+          
+         <div class="span12 nomarginleft">
+				<?php if (!empty($claim->icd10_codes)): ?>
+            <?php foreach ($claim->icd10_codes as $icd10Codes): ?>
+                <div class="inlinebox"><?= h($icd10Codes->code) ?> <?= h($icd10Codes->description) ?></div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+			</div>
+        </div>
+      </div>
+    
+      <div class="clear">&nbsp;
+      </div>
+      <div class="span8 nomarginleft"><strong>Date of Service :</strong> <?php echo date("m/d/Y",strtotime($claim->date_of_service));?>
+	 
+	  </div>
+      <div class="span4 pull-right">
+       
+      </div>
+	   <div class="span8 nomarginleft"><strong>Note :</strong> <?php echo $claim->comments; ?>
+   </div>
+	   <div class="clear"></div>
+      <div class="clear"></div>
+	  
+	    <div class="span8 nomarginleft"><strong>Name :</strong> <?php echo $Usersname; ?>
+	 
+	  </div>
+	  
+      <div class="span4 pull-right">
+       
+      </div>
+	  
+	      <div class="span6 nomarginleft"><strong>
+      <?= __('Signature') ?>
+      </strong><br>
+      <br>
+      <div>
+        <?php if($claim->signature!=''){?>
+        <a title="Signature" onclick="PopupCenterDual('<?php echo $this->request->webroot?>uploads/<?php echo $claim->signature;?>', 'Signature',450,450);"><img src="<?php echo $this->request->webroot?>img/user-bg.png" width="50" height="50"> <br>
+        <?php echo $claim->signature;?> </a>
+        <?php }?>
+      </div>
+    </div>
+	  
+      <div></div>
+    </div>
+  </div>
+<div class="clear"><h3 style="margin-bottom:5px;">Reviewer Notes</h3></div>
+  <div class="reviewnotes">
+  <div class="clear">
+  <div class="span3 nomarginleft">
+  <?php 
+			$options = [
+    'Reviewer Approved' => 'Reviewer Approved',
+	'Missing Information' => 'Missing Information',
+    'WRONG CPT CODE' => 'WRONG CPT CODE',
+	'WRONG ICD10 CODE' => 'WRONG ICD10 CODE',
+	'Denied' =>'Denied'
+];
+echo $this->Form->select('notes.option1', $options, ['empty'=>'Select Option',
+    'div'=>false
+]);
+			?>
+  </div>
+  </div>
+  <div class="clear"></div>
+  <div style="margin-top:10px;margin-bottom:10px;"><strong>Comment</strong></div><?php echo $this->Form->input('notes.note', ['label'=>false,'div'=>false,'class'=>'input','type'=>'textarea']);?>
+  <div class="clear"><br></div>
+  <div><strong>Claim Status</strong> :&nbsp;&nbsp; 
+  <?php 
+echo $this->Form->select('claim_status_id', $claimStatus,['label'=>false]);
+			?>
+</div>
+<div class="clear"><br><br></div>
+  <div style="float:left">
+<div style="float:left">
+    <?= $this->Form->button(__('Submit'),['class'=>'btn-primary']) ?>
+  </div>
+  <br><br>
+  </div>
+  </div>
+</div>
+
+</fieldset>
+<div class="clear"></div>
+<div style="float:left">
+  <div style="float:left"> </div>
+</div>
+<?= $this->Form->end() ?>
+<br>
+<br>
+</div>
+<script type="text/javascript">
+function claimsummary(cid){
+		var mId = $.sModal({
+            header:'',
+			width:780,
+            animate:'fadeDown',
+            content :$('<div></div>').load("<?php echo $this->request->webroot?>claim/ajax_claimsummary/"+cid),
+            buttons:[
+                {
+                    text:'&nbsp; <?php echo __('Back'); ?> &nbsp;',
+                    addClass:'btn-primary',
+                    click:function(id){}
+                }
+            ]
+        });
+	}
+$(document).ready(function($){
+$(".checked").attr("checked",true);
+$('.datepicker').datepicker({ dateFormat: "mm/dd/yy",maxDate: 0,changeMonth: true,
+			changeYear: true,yearRange: "1960:nn-" });
+			
+});
+$(function(){    
+    $('.view-pdf').on('click',function(){
+        var pdf_link = $(this).attr('href');
+		var mod_title = $(this).attr('title');
+		if(mod_title == ''){
+			mod_title = 'My Title';
+		}
+        var iframe = '<div class="iframe-container"><iframe src="'+pdf_link+'"></iframe></div>'
+        $.createModal({
+        title:mod_title,
+        message: iframe,
+        closeButton:true,
+        scrollable:false
+        });
+        return false;        
+    });    
+});
+jQuery('#claimlist').load("<?php echo $this->request->webroot?>claim/ajax_patientclaim/<?php echo $patient->id?>");
+</script>
